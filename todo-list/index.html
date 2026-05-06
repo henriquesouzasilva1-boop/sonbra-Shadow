@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Pro - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <h1>✅ To-Do List Pro</h1>
+                <button id="themeToggle" class="theme-toggle">🌙</button>
+            </div>
+            <p class="subtitle">Organize suas tarefas e aumente sua produtividade</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        placeholder="Adicione uma nova tarefa..."
+                        class="task-input"
+                    >
+                    <button id="addBtn" class="add-btn">+ Adicionar</button>
+                </div>
+                
+                <!-- Priority and Category -->
+                <div class="options-group">
+                    <select id="prioritySelect" class="priority-select">
+                        <option value="low">🟢 Baixa Prioridade</option>
+                        <option value="medium" selected>🟡 Média Prioridade</option>
+                        <option value="high">🔴 Alta Prioridade</option>
+                    </select>
+                    
+                    <select id="categorySelect" class="category-select">
+                        <option value="work">💼 Trabalho</option>
+                        <option value="personal">👤 Pessoal</option>
+                        <option value="shopping">🛒 Compras</option>
+                        <option value="health">🏥 Saúde</option>
+                        <option value="study">📚 Estudo</option>
+                        <option value="other">📌 Outro</option>
+                    </select>
+                    
+                    <input 
+                        type="date" 
+                        id="dueDateInput" 
+                        class="date-input"
+                    >
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <span class="stat-label">Total de Tarefas</span>
+                    <span class="stat-value" id="totalTasks">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Concluídas</span>
+                    <span class="stat-value" id="completedTasks">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Pendentes</span>
+                    <span class="stat-value" id="pendingTasks">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Taxa de Conclusão</span>
+                    <span class="stat-value" id="completionRate">0%</span>
+                </div>
+            </section>
+
+            <!-- Filters Section -->
+            <section class="filters-section">
+                <button class="filter-btn active" data-filter="all">📋 Todas</button>
+                <button class="filter-btn" data-filter="active">🔄 Ativas</button>
+                <button class="filter-btn" data-filter="completed">✓ Concluídas</button>
+                <button class="filter-btn" data-filter="high">🔴 Alta Prioridade</button>
+                <button class="filter-btn" data-filter="today">📅 Hoje</button>
+            </section>
+
+            <!-- Category Tabs -->
+            <section class="category-tabs">
+                <button class="category-tab active" data-category="all">Todas</button>
+                <button class="category-tab" data-category="work">💼 Trabalho</button>
+                <button class="category-tab" data-category="personal">👤 Pessoal</button>
+                <button class="category-tab" data-category="shopping">🛒 Compras</button>
+                <button class="category-tab" data-category="health">🏥 Saúde</button>
+                <button class="category-tab" data-category="study">📚 Estudo</button>
+            </section>
+
+            <!-- Sort Options -->
+            <section class="sort-section">
+                <label for="sortSelect">Ordenar por:</label>
+                <select id="sortSelect" class="sort-select">
+                    <option value="recent">Mais Recente</option>
+                    <option value="priority">Prioridade</option>
+                    <option value="dueDate">Data de Vencimento</option>
+                    <option value="alphabetic">Ordem Alfabética</option>
+                </select>
+                
+                <button id="clearCompletedBtn" class="clear-btn">🗑️ Limpar Concluídas</button>
+                <button id="exportBtn" class="export-btn">📥 Exportar</button>
+                <button id="importBtn" class="import-btn">📤 Importar</button>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <div id="tasksList" class="tasks-list"></div>
+                <div id="emptyState" class="empty-state">
+                    <p>🎉 Nenhuma tarefa! Você está em dia!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal para editar tarefa -->
+        <div id="editModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Editar Tarefa</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="editTaskInput" class="edit-input" placeholder="Editar tarefa...">
+                    <select id="editPrioritySelect" class="priority-select">
+                        <option value="low">🟢 Baixa Prioridade</option>
+                        <option value="medium">🟡 Média Prioridade</option>
+                        <option value="high">🔴 Alta Prioridade</option>
+                    </select>
+                    <input type="date" id="editDueDateInput" class="date-input">
+                </div>
+                <div class="modal-footer">
+                    <button id="saveEditBtn" class="btn-primary">Salvar</button>
+                    <button id="cancelEditBtn" class="btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>To-Do List Pro © 2026 | Todas as tarefas são salvas automaticamente</p>
+            <p>Desenvolvido com ❤️ por Henrique Silva</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
