@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard Pro - Previsão do Tempo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-top">
+                <h1>🌤️ Weather Dashboard Pro</h1>
+                <button id="themeToggle" class="theme-toggle">🌙</button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-section">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="cityInput" 
+                        placeholder="Buscar cidade..." 
+                        class="search-input"
+                    >
+                    <button id="searchBtn" class="search-btn">🔍</button>
+                    <button id="geoBtn" class="geo-btn" title="Usar minha localização">📍</button>
+                </div>
+                <!-- Autocomplete Dropdown -->
+                <ul id="suggestionsList" class="suggestions-list"></ul>
+            </div>
+
+            <!-- History -->
+            <div class="history-section">
+                <h3>Histórico de Buscas</h3>
+                <div id="historyList" class="history-list"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather -->
+            <section id="currentWeather" class="current-weather hidden">
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h2 id="cityName"></h2>
+                        <p id="currentDate"></p>
+                    </div>
+                    <div class="weather-main">
+                        <img id="weatherIcon" src="" alt="Clima" class="weather-icon">
+                        <div class="temp-section">
+                            <div class="temp">
+                                <span id="temperature"></span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <p id="weatherDescription"></p>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail">
+                            <span class="label">Sensação Térmica</span>
+                            <span id="feelsLike"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Umidade</span>
+                            <span id="humidity"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Pressão</span>
+                            <span id="pressure"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Visibilidade</span>
+                            <span id="visibility"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Vento</span>
+                            <span id="windSpeed"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Direção do Vento</span>
+                            <span id="windDirection"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Ponto de Orvalho</span>
+                            <span id="dewPoint"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Índice UV</span>
+                            <span id="uvIndex"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Nascer do Sol</span>
+                            <span id="sunrise"></span>
+                        </div>
+                        <div class="detail">
+                            <span class="label">Pôr do Sol</span>
+                            <span id="sunset"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Alerts Section -->
+            <section id="alertsSection" class="alerts-section hidden">
+                <h3>⚠️ Alertas de Clima</h3>
+                <div id="alertsList" class="alerts-list"></div>
+            </section>
+
+            <!-- Gráficos -->
+            <section class="charts-section hidden" id="chartsSection">
+                <h3>📊 Análise de Dados</h3>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="humidityChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="windChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="precipitationChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section id="hourlySection" class="hourly-section hidden">
+                <h3>⏰ Previsão Horária (24h)</h3>
+                <div id="hourlyList" class="hourly-list"></div>
+            </section>
+
+            <!-- 5-Day Forecast -->
+            <section id="forecastSection" class="forecast-section hidden">
+                <h3>📅 Previsão de 5 Dias</h3>
+                <div id="forecastList" class="forecast-list"></div>
+            </section>
+
+            <!-- Compare Cities -->
+            <section id="compareSection" class="compare-section hidden">
+                <h3>🌍 Comparar Cidades</h3>
+                <div class="compare-controls">
+                    <input 
+                        type="text" 
+                        id="compareInput" 
+                        placeholder="Adicionar cidade para comparar..."
+                        class="compare-input"
+                    >
+                    <button id="compareBtn" class="compare-btn">+ Adicionar</button>
+                </div>
+                <div id="compareList" class="compare-list"></div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Weather Dashboard Pro © 2026 | Dados fornecidos por OpenWeatherMap</p>
+            <p>Desenvolvido com ❤️ por Henrique Silva</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
